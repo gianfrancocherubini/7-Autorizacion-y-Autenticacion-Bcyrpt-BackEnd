@@ -1,7 +1,8 @@
-const { Router } = require('express');
-const usuariosModelo = require('../dao/models/usuarios.model');
-const utils = require('../utils.js');
-const router = Router();
+import { Router } from 'express';
+import { UsuariosModelo } from '../dao/models/usuarios.model.js';
+import { creaHash  } from '../utils.js';
+
+export const router=Router()
 
 router.get('/', async (req, res) => {
     let { errorMessage } = req.query;
@@ -21,7 +22,7 @@ router.post('/', async (req, res) => {
         return res.status(400).redirect('/api/registro?errorMessage=Mail con formato incorrecto...!!!');
     }
 
-    let existe = await usuariosModelo.findOne({ email });
+    let existe = await UsuariosModelo.findOne({ email });
     if (existe) {
         return res.status(400).redirect(`/api/registro?errorMessage=Existen usuarios con email ${email} en la BD`);
     }
@@ -29,7 +30,7 @@ router.post('/', async (req, res) => {
     if (email === 'adminCoder@coder.com' && password === 'coder123') {
         // No incluir la contraseña en el objeto que se está creando
         try {
-            let usuario = await usuariosModelo.create({ nombre, email, rol: 'administrador' });
+            let usuario = await UsuariosModelo.create({ nombre, email, rol: 'administrador' });
             res.setHeader('Content-Type', 'application/json');
             res.status(201).json({ success: true, message: 'Usuario administrador creado correctamente', usuario });
             res.redirect(`/api/login?message=Usuario ${email} registrado correctamente`);
@@ -41,10 +42,10 @@ router.post('/', async (req, res) => {
     } else {
         // Si no es un usuario administrador, asigna el rol 'usuario'
         // Utilizando la función creaHash de utils.js
-        password = utils.creaHash(password);
+        password = creaHash(password);
 
         try {
-            let usuario = await usuariosModelo.create({ nombre, email, password, rol: 'usuario' });
+            let usuario = await UsuariosModelo.create({ nombre, email, password, rol: 'usuario' });
             res.setHeader('Content-Type', 'application/json');
             res.status(201).json({ success: true, message: 'Usuario creado correctamente', usuario });
             res.redirect(`/api/login?message=Usuario ${email} registrado correctamente`);
@@ -56,4 +57,3 @@ router.post('/', async (req, res) => {
     }
 });
 
-module.exports = router;

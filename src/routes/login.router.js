@@ -1,8 +1,8 @@
-const { Router } = require('express');
-const usuariosModelo = require('../dao/models/usuarios.model')
-// const crypto = require('crypto');
-const utils = require('../utils.js');
-const router = Router();
+import { Router } from 'express';
+import { UsuariosModelo } from '../dao/models/usuarios.model.js';
+import { validaPassword } from '../utils.js';
+
+export const router=Router()
 
 router.get('/', (req, res) => {
     let { error, message } = req.query;
@@ -19,14 +19,14 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    let usuario = await usuariosModelo.findOne({ email });
+    let usuario = await UsuariosModelo.findOne({ email });
 
     if (!usuario) {
         res.status(401).redirect(`/api/login?error=credenciales incorrectas`); 
         return;
     }
 
-    if (!utils.validaPassword(usuario, password)) {
+    if (validaPassword(usuario, password)) {
         res.status(401).redirect(`/api/login?error=credenciales incorrectas`); 
         return;
     }
@@ -41,4 +41,3 @@ router.post('/', async (req, res) => {
     res.redirect('/home');
 });
 
-module.exports = router;

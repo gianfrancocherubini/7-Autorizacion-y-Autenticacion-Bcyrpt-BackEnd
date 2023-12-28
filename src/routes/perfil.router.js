@@ -1,6 +1,6 @@
-const { Router } = require('express');
+import { Router } from 'express';
 
-const router = Router();
+export const router=Router()
 
 const auth = (req, res, next) => {
     if (!req.session.usuario) {
@@ -18,4 +18,3 @@ router.get('/', auth, (req, res) => {
     res.status(200).render('perfil', { usuario });
 });
 
-module.exports = router;

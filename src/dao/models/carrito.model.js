@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const cartsColeccion = 'carts';
 
@@ -21,6 +21,5 @@ const cartSchema = new mongoose.Schema({
   strict: false,    
 });
 
-const Cart = mongoose.model('carts', cartSchema);
+export const Cart = mongoose.model('carts', cartSchema);
 
-module.exports = Cart;

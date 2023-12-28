@@ -2,10 +2,10 @@
 // http://localhost:3014/home?category=computadoras para acceder a las computadoras
 // http://localhost:3014/home?category=celulares  para acceder a los celulares
 
-const {Router}=require('express')
-const ProductEsquema = require('../dao/models/products.model')
+import { Router } from 'express';
+import { ProductEsquema } from '../dao/models/products.model.js'
 
-const router=Router()
+export const router=Router()
  
 router.get('/', async (req, res) => {
     try {
@@ -112,4 +112,3 @@ router.put('/:pid', async (req, res) => {
     }
 });
 
-module.exports = router ;

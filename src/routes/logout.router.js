@@ -1,6 +1,6 @@
-const { Router } = require('express');
+import { Router } from 'express';
 
-const router = Router();
+export const router=Router()
 
 router.get('/', (req, res) => {
     req.session.destroy(error => {
@@ -13,4 +13,3 @@ router.get('/', (req, res) => {
     });
 });
 
-module.exports = router;

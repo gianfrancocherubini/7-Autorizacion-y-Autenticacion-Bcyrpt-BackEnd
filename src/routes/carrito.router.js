@@ -1,12 +1,11 @@
 // listo el post para crear carrito
+import { Router } from 'express';
+import CarritoManager from '../dao/carritoManagerMongo.js';
 
-
-const { Router } = require('express');
-const CarritoManager = require('../dao/carritoManagerMongo');
 const cm = new CarritoManager();
 
 
-const router = Router();
+export const router=Router()
 
 router.post('/', async (req, res) => {
     try {
@@ -117,4 +116,3 @@ router.delete('/:cid', async (req, res) => {
 });
   
 
-module.exports = router;

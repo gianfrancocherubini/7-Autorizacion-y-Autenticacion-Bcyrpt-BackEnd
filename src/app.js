@@ -1,16 +1,17 @@
-const express = require('express');
-const routerCarrito = require('./routes/carrito.router');
-const routerHome  = require('./routes/products.router');
-const routerRegistro =require ('./routes/registro.router')
-const routerLogin =require ('./routes/login.router')
-const routerPerfil =require ('./routes/perfil.router')
-const routerLogout =require ('./routes/logout.router')
-const {engine}=require('express-handlebars')
-const path = require('path');
-const mongoose =require(`mongoose`)
-const sessions = require ('express-session')
-const mongoStore = require ('connect-mongo')
-const cookieParser = require('cookie-parser');
+import  express  from 'express';
+import { engine } from 'express-handlebars';
+import path from 'path';
+import mongoose from 'mongoose';
+import sessions from 'express-session';
+import mongoStore from 'connect-mongo';
+import cookieParser from 'cookie-parser';
+import __dirname from './utils.js';
+import { router as routerCarrito } from './routes/carrito.router.js';
+import { router as routerHome } from './routes/products.router.js';
+import { router as routerRegistro } from './routes/registro.router.js';
+import { router as routerLogin } from './routes/login.router.js';
+import { router as routerPerfil } from './routes/perfil.router.js';
+import { router as routerLogout } from './routes/logout.router.js';
 
 const PORT = 3012;
 const app = express();
