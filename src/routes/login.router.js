@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
         return;
     }
 
-    if (validaPassword(usuario, password)) {
+    if (!validaPassword(usuario, password)) {
         res.status(401).redirect(`/api/login?error=credenciales incorrectas`); 
         return;
     }
