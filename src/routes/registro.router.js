@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     let { errorMessage } = req.query;
     let { message } = req.query;
     res.setHeader('Content-Type', 'text/html');
-    res.status(200).render('registro', { errorMessage, message });
+    res.status(200).render('registro', { errorMessage, message });   
 });
 
 router.post('/', async (req, res) => {
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
     } else {
         password = creaHash(password);
         try {
-            let usuario = await UsuariosModelo.create({ nombre, email, password, rol: 'usuario' });
+            let usuario = await UsuariosModelo.create({ nombre, email, password});
             res.redirect(`/api/login?message=Usuario ${email} registrado correctamente`);
         } catch (error) {
             res.redirect('/api/registro?error=Error inesperado. Reintente en unos minutos');

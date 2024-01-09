@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
             prevPage: products.prevPage,
             nextPage: products.nextPage,
             currentPage: page,
-            currentCategory: category  // Asegúrate de pasar la categoría a la vista
+            currentCategory: category  
         });
         console.log(products);
     } catch (err) {

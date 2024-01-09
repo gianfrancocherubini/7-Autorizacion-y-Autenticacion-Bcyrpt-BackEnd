@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     let { email, password } = req.body;
 
     if (!email || !password) {
-        res.status(400).redirect('/api/login?error=Complete todos los datos'); 
+        res.status(400).redirect('/api/login?message=Complete todos los datos'); 
         return;
     }
 
