@@ -4,7 +4,16 @@ import { validaPassword } from '../utils.js';
 
 export const router=Router()
 
-router.get('/', (req, res) => {
+const auth2 = (req, res, next) => {
+    if (req.session.usuario) {
+        res.status(401).redirect('/api/perfil'); 
+        return;
+    }
+
+    next();
+};
+
+router.get('/', auth2, (req, res) => {
     let { error, message } = req.query;
     
     res.setHeader('Content-Type', 'text/html');

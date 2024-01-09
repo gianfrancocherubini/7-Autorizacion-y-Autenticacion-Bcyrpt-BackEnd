@@ -11,6 +11,15 @@ const auth = (req, res, next) => {
     next();
 };
 
+const auth2 = (req, res, next) => {
+    if (req.session.usuario) {
+        res.status(401).redirect('/api/perfil'); 
+        return;
+    }
+
+    next();
+};
+
 router.get('/', auth, (req, res) => {
     let usuario = req.session.usuario;
 

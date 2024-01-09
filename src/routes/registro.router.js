@@ -4,7 +4,17 @@ import { creaHash  } from '../utils.js';
 
 export const router=Router()
 
-router.get('/', async (req, res) => {
+const auth2 = (req, res, next) => {
+    if (req.session.usuario) {
+        res.status(401).redirect('/api/perfil'); 
+        return;
+    }
+
+    next();
+};
+
+
+router.get('/', auth2, async (req, res) => {
     let { errorMessage } = req.query;
     let { message } = req.query;
     res.setHeader('Content-Type', 'text/html');
