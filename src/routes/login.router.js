@@ -17,7 +17,7 @@ router.get('/', auth2, (req, res) => {
     let { error, message } = req.query;
     
     res.setHeader('Content-Type', 'text/html');
-    res.status(200).render('login', { error, message });
+    res.status(200).render('login', { error, message, login: false });
 });
 
 router.post('/', async (req, res) => {

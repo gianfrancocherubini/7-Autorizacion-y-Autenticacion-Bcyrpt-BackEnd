@@ -18,7 +18,7 @@ router.get('/', auth2, async (req, res) => {
     let { errorMessage } = req.query;
     let { message } = req.query;
     res.setHeader('Content-Type', 'text/html');
-    res.status(200).render('registro', { errorMessage, message });   
+    res.status(200).render('registro', { errorMessage, message, login : false });   
 });
 
 router.post('/', async (req, res) => {

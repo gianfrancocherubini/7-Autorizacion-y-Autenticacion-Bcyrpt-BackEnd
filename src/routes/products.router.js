@@ -33,7 +33,8 @@ router.get('/', async (req, res) => {
             prevPage: products.prevPage,
             nextPage: products.nextPage,
             currentPage: page,
-            currentCategory: category  
+            currentCategory: category,
+            login: req.session.usuario?true:false
         });
         console.log(products);
     } catch (err) {
